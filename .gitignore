@@ -1,5 +1,3 @@
 .vscode/tasks.json
 .vscode/launch.json
-src/Estimador_PI_mutex_InLoop.exe
-src/Estimador_PI_mutex_OutLoop.exe
 src/Estimador_PI_serial.exe
