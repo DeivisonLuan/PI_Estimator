@@ -32,7 +32,6 @@ https://github.com/josenalde/flux-embedded-design/blob/main/exercises/atividade_
 */
 
 #include <iostream>
-#include <pthread.h>
 #include <cstdlib>
 #include <ctime>
 
@@ -46,22 +45,19 @@ double matrix[M][N] = {0};
 double vectorX[N] = {0}, vectorY[M] = {0};
 double sum = 0.0;
 
-//inicializa o mutex com atributos padrão
-pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
-
 //Função das threads
-void* Ax_vector(void* id){
+void Ax_vector(){
   long thread_id = (long) id; //typecast
   int i, j;
   int local_m = M/MaxThread;
     int my_start = thread_id * local_m;
     int my_end = (thread_id+1) * local_m - 1;
+    
     for (i = my_start; i <= my_end; i++) {
         vectorY[i] = 0.0;
         for (j = 0; j < N; j++)
             vectorY[i] += matrix[i][j] * vectorX[j];
     }
-  return NULL; //evita warning
 }
 
 void generateMatrix(double *m, int line, int column){
@@ -78,31 +74,18 @@ void generateVector(double *v, int lenght){
   }
 }
 
-
-
 int main(){
-  pthread_t threads[MaxThread];
-  int err;
 
   srand(time(NULL)); //inicializa o gerador de numeros aleatórios baseados no tempo atual
   
   generateMatrix(&matrix[0][0],M,N);
   generateVector(vectorX,N);
 
-  pthread_mutex_init(&lock, NULL); // o segundo parâmetro = NULL significa que usará atributos padrão
+
 
   clock_t timeStart, timeEnd;
   timeStart = clock(); //marcar o tempo inicial
 
-  for(long i=0; i<MaxThread; i++){
-    err = pthread_create(&threads[i], NULL, Ax_vector, (void*)i);
-  }
-  
-  for (int i=0; i<MaxThread; i++) {
-    err  = pthread_join(threads[i], NULL);
-  }
-
-  pthread_mutex_destroy(&lock);
 
   timeEnd = clock(); //marca o tempo final
   double execTime = (double)(timeEnd - timeStart)/(double) CLOCKS_PER_SEC;
