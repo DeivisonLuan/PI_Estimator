@@ -113,4 +113,4 @@ int main(){
   return 0;
 }
 
-//usando o race condition não precisa de pthread, rever isso
+//usando o race condition não precisa de mutex, rever isso
