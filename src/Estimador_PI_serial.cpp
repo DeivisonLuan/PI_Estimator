@@ -41,9 +41,8 @@ https://github.com/josenalde/flux-embedded-design/blob/main/exercises/atividade_
 using namespace std;
 
 //definição de variaveis globais
-#define MaxThread 12 //numero máximo de threads do CPU
-#define n 1000000 //numero de parcelas somadas 
-#define iter 2 //numero de iterações
+#define n 100000000 //numero de parcelas somadas 
+#define iter 1 //numero de iterações
 
 int main(){
 

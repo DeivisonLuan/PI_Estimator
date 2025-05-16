@@ -51,16 +51,16 @@ pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
 //Função das threads
 void* Ax_vector(void* id){
-  long thread_id = (long) id; //typecast
+  long thread_id = (long long) id; //typecast
   int i, j;
   int local_m = M/MaxThread;
-    int my_start = thread_id * local_m;
-    int my_end = (thread_id+1) * local_m - 1;
-    for (i = my_start; i <= my_end; i++) {
-        vectorY[i] = 0.0;
-        for (j = 0; j < N; j++)
-            vectorY[i] += matrix[i][j] * vectorX[j];
-    }
+  int my_start = thread_id * local_m;
+  int my_end = (thread_id+1) * local_m - 1;
+  for (i = my_start; i <= my_end; i++) {
+      vectorY[i] = 0.0;
+      for (j = 0; j < N; j++)
+          vectorY[i] += matrix[i][j] * vectorX[j];
+  }
   return NULL; //evita warning
 }
 
@@ -77,8 +77,6 @@ void generateVector(double *v, int lenght){
     v[i] = rand() % 5 + 1;
   }
 }
-
-
 
 int main(){
   pthread_t threads[MaxThread];
@@ -108,7 +106,6 @@ int main(){
   double execTime = (double)(timeEnd - timeStart)/(double) CLOCKS_PER_SEC;
   cout.precision(12);
   cout << fixed << "Tempo de execução: " << execTime << endl;
-  cout << "Numero pi encontrado com " << N << " parcelas somadas: " << sum << endl;
   
   return 0;
 }

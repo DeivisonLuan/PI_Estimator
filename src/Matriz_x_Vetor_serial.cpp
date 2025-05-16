@@ -43,19 +43,12 @@ using namespace std;
 #define N 8 //numero de colunas
 double matrix[M][N] = {0};
 double vectorX[N] = {0}, vectorY[M] = {0};
-double sum = 0.0;
 
 //Função das threads
-void Ax_vector(){
-  long thread_id = (long) id; //typecast
-  int i, j;
-  int local_m = M/MaxThread;
-    int my_start = thread_id * local_m;
-    int my_end = (thread_id+1) * local_m - 1;
-    
-    for (i = my_start; i <= my_end; i++) {
+void Ax_vector(){    
+    for (int i = 0; i <= M; i++) {
         vectorY[i] = 0.0;
-        for (j = 0; j < N; j++)
+        for (int j = 0; j < N; j++)
             vectorY[i] += matrix[i][j] * vectorX[j];
     }
 }
@@ -81,17 +74,15 @@ int main(){
   generateMatrix(&matrix[0][0],M,N);
   generateVector(vectorX,N);
 
-
-
   clock_t timeStart, timeEnd;
   timeStart = clock(); //marcar o tempo inicial
 
+  Ax_vector();
 
   timeEnd = clock(); //marca o tempo final
   double execTime = (double)(timeEnd - timeStart)/(double) CLOCKS_PER_SEC;
   cout.precision(12);
   cout << fixed << "Tempo de execução: " << execTime << endl;
-  cout << "Numero pi encontrado com " << N << " parcelas somadas: " << sum << endl;
   
   return 0;
 }

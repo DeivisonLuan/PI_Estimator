@@ -42,8 +42,8 @@ https://github.com/josenalde/flux-embedded-design/blob/main/exercises/atividade_
 using namespace std;
 
 //definição de variaveis globais
-#define MaxThread 12 //numero máximo de threads do CPU
-#define N 12*1000000 //numero de parcelas somadas
+#define MaxThread 6 //numero máximo de threads do CPU
+#define N 100000 //numero de parcelas somadas
 double sum = 0.0;
 double parcel[MaxThread] = {0};
 
@@ -52,7 +52,7 @@ pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
 //Função das threads
 void* pi_parcel(void* id){
-  long thread_id = (long) id; //typecast
+  long thread_id = (long long) id; //typecast
   long long i;
   long long new_N = N/MaxThread;
   long long first_parcel = new_N * thread_id;
@@ -75,7 +75,7 @@ void* pi_parcel(void* id){
 int main(){
   pthread_t threads[MaxThread];
   int err;
-
+  
   pthread_mutex_init(&lock, NULL); // o segundo parâmetro = NULL significa que usará atributos padrão
 
   clock_t timeStart, timeEnd;
@@ -91,11 +91,13 @@ int main(){
 
   pthread_mutex_destroy(&lock);
 
+  double pi = 4.0*sum;
+
   timeEnd = clock(); //marca o tempo final
   double execTime = (double)(timeEnd - timeStart)/(double) CLOCKS_PER_SEC;
   cout.precision(12);
   cout << fixed << "Tempo de execução: " << execTime << endl;
-  cout << "Numero pi encontrado com " << N << " parcelas somadas: " << sum << endl;
+  cout << "Numero pi encontrado com " << N << " parcelas somadas: " << pi << endl;
   
   return 0;
 }

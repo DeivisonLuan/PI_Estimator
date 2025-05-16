@@ -1,3 +1,7 @@
-.vscode/tasks.json
-.vscode/launch.json
+.vscode
+src/Estimador_PI_mutex_InLoop.exe
+src/Estimador_PI_mutex_OutLoop.exe
 src/Estimador_PI_serial.exe
+src/Matriz_x_Vetor_serial.exe
+src/Matriz_x_Vetor.exe
+Tabela comparativa.docx
