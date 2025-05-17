@@ -9,6 +9,8 @@ Este projeto tem como objetivo aplicar conceitos de programação paralela em am
 
 Todos os códigos foram desenvolvidos em C++ e compilados no **Ubuntu 24.04 LTS** via **WSL** (Windows Subsystem for Linux), aproveitando o suporte a múltiplos núcleos da CPU AMD Ryzen 5 5600G.
 
+As descrições da atividade completa podem ser encontradas em: https://github.com/josenalde/flux-embedded-design/blob/main/exercises/atividade_3.ipynb
+
 ---
 
 ## 🧠 Parte 1 – Estimativa de PI
@@ -28,14 +30,13 @@ Para cada versão, são comparados:
 
 - Tempo médio de execução.
 - Valor estimado de PI.
-- Precisão relativa.
 
 ---
 
 ## 🧠 Parte 2 – Multiplicação Matriz × Vetor
 
 ### 🎯 Objetivo
-Realizar a multiplicação entre uma matriz `A[m][n]` e um vetor `v[n]` de forma paralela, para três cenários distintos:
+Realizar a multiplicação entre uma matriz $A_{m \times n}$ e um vetor $x_{n \times 1}$ de forma paralela, para três cenários distintos:
 
 | Caso | Dimensão da Matriz (m x n) | Dimensão do Vetor | Característica Principal     |
 |------|-----------------------------|--------------------|------------------------------|
@@ -54,7 +55,7 @@ Todos os valores são números do tipo `double`, gerados aleatoriamente no inter
 |---------------------|-----------------------------------------------|
 | **SO Host**         | Windows 11                                    |
 | **SO Execução**     | Ubuntu 24.04.2 LTS via WSL                    |
-| **Compilador**      | `g++` com suporte a C++17 ou superior         |
+| **Compilador**      | `g++` versão 14.2                             |
 | **Hardware**        | AMD Ryzen 5 5600G                             |
 | **Núcleos**         | 6 físicos, 12 threads                         |
 | **Cache**           | L1d: 192 KiB, L2: 3 MiB, L3: 16 MiB           |
@@ -66,27 +67,25 @@ Todos os valores são números do tipo `double`, gerados aleatoriamente no inter
 1. Clone este repositório:
 
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
-   cd seu-repositorio
+   git clone https://github.com/DeivisonLuan/PI_Estimator.git
+   cd PI_Estimator
    ```
 
 2. Compile os programas:
 
    ```bash
-   g++ -o pi_serial pi_serial.cpp -std=c++17
-   g++ -o pi_mutex_dentro pi_mutex_dentro.cpp -pthread -std=c++17
-   g++ -o pi_mutex_fora pi_mutex_fora.cpp -pthread -std=c++17
+   g++ -o Estimador_PI_serial Estimador_PI_serial.cpp 
+   g++ -o Estimador_PI_mutex_InLoop Estimador_PI_mutex_InLoop.cpp -pthread 
+   g++ -o Estimador_PI_mutex_OutLoop Estimador_PI_mutex_OutLoop.cpp -pthread 
 
-   g++ -o mult_matriz_vetor mult_matriz_vetor.cpp -pthread -std=c++17
+   g++ -o Matriz_x_Vetor_serial Matriz_x_Vetor_serial.cpp 
+   g++ -o Matriz_x_Vetor Matriz_x_Vetor.cpp -pthread 
    ```
 
-3. Execute cada versão:
+3. Executando os programas:
 
    ```bash
-   ./pi_serial
-   ./pi_mutex_dentro
-   ./pi_mutex_fora
-   ./mult_matriz_vetor
+   ./nome_do_programa.exe 
    ```
 
 ---
@@ -99,30 +98,10 @@ Todos os valores são números do tipo `double`, gerados aleatoriamente no inter
 
 ---
 
-## 📁 Organização do Repositório
-
-```
-.
-├── README.md
-├── pi_serial.cpp
-├── pi_mutex_dentro.cpp
-├── pi_mutex_fora.cpp
-├── mult_matriz_vetor.cpp
-├── scripts/               # (Opcional) Scripts de automação ou análise
-└── resultados/            # (Opcional) Tabelas, gráficos e logs
-```
-
----
-
 ## ✍️ Autor
 
-- **Nome**: _Seu Nome Aqui_
-- **Disciplina**: Sistemas Embarcados / Programação Paralela
-- **Professor**: _Nome do professor (se desejar)_
-- **Instituição**: _Nome da instituição_
+- **Nome**: Deivison Luan Xavier Silva
+- **Disciplina**: Fluxo e metodologias de projeto de sistemas embarcados
+- **Professor**: Prof. Josenalde
+- **Instituição**: UFRN
 
----
-
-## 📝 Licença
-
-Este projeto é apenas para fins educacionais e acadêmicos.
