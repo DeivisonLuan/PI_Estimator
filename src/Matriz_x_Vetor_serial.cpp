@@ -38,9 +38,8 @@ https://github.com/josenalde/flux-embedded-design/blob/main/exercises/atividade_
 using namespace std;
 
 //definição de variaveis globais
-#define MaxThread 12 //numero máximo de threads do CPU
-#define M 8000000 //numero de linhas
-#define N 8 //numero de colunas
+#define M 8 //numero de linhas
+#define N 8000000 //numero de colunas
 double matrix[M][N] = {0};
 double vectorX[N] = {0}, vectorY[M] = {0};
 
@@ -86,5 +85,3 @@ int main(){
   
   return 0;
 }
-
-//usando o race condition não precisa de pthread, rever isso
